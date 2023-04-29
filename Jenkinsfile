@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Cloning our Git') {
             steps {
-                git ''
+                git 'https://github.com/Nithin93981/dockertesting.git'
             }
         }
         stage('Building our image') {
