@@ -2,14 +2,14 @@ pipeline {
     environment {
         registry = 'suramnithin/dockerjenkins'
         registryCredential = 'dockerhub_id'
-        dockerSwarmManager = '10.5.1.148:2375'
+        dockerSwarmManager = '10.5.2.185:2375'
         dockerImage = ''
     }
     agent any
     stages {
         stage('Cloning our Git') {
             steps {
-                git 'https://github.com/Nithin93981/dockertesting.git'
+                 git branch:'main', url: ' https://github.com/Nithin93981/dockertesting.git'
             }
         }
         stage('Building our image') {
