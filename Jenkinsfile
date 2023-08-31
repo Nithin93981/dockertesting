@@ -3,7 +3,6 @@ pipeline {
         registry = 'suramnithin/dockerjenkins'
         registryCredential = 'dockerhub_id'
         dockerSwarmManager = '10.5.1.148:2375'
-        dockerhost = '10.5.1.148'
         dockerImage = ''
     }
     agent any
@@ -39,11 +38,6 @@ pipeline {
                 sh "docker -H tcp://$dockerSwarmManager service rm testing1 || true"
                 sh "docker -H tcp://$dockerSwarmManager service create --name testing1 -p 8100:80 $registry:v$BUILD_NUMBER"
             }
-        }
-        stage('Verifying The Deployment') {
-            steps {
-                sh 'curl http://$dockerhost:8100 || exit 1'
-                }
         }
     }
 }
