@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM nginx:latest
 LABEL "Email"="suramnithin@gmail.com" 
 RUN apt update -y \
     && apt install nginx -y \
