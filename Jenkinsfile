@@ -34,7 +34,7 @@ pipeline {
         }
         stage('Deploying to Docker Swarm') {
             steps {
-                // sh "docker -H tcp://10.5.2.185:2375 service rm testing1 || true"
+                sh "docker stop  nginx || true"
                 sh "docker run --rm -dit  --name nginx -p 9500:80 $registry:v$BUILD_NUMBER"
             }
         }
