@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
+                        dockerImage.push("v$BUILD_NUMBER")
                     }
                 }
             }
@@ -34,8 +34,8 @@ pipeline {
         }
         stage('Deploying to Docker Swarm') {
             steps {
-                sh "docker -H tcp://10.5.2.185:2375 service rm testing1 || true"
-                sh "docker -H tcp://10.5.2.185:2375 service create --name nginx -p 9000:80 $registry:v$BUILD_NUMBER"
+                // sh "docker -H tcp://10.5.2.185:2375 service rm testing1 || true"
+                sh "docker run --dit  --name nginx -p 9500:80 $registry:v$BUILD_NUMBER"
             }
         }
     }
