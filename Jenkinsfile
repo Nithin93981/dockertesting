@@ -2,7 +2,6 @@ pipeline {
     environment {
         registry = 'suramnithin/dockerjenkins'
         registryCredential = 'dockerhub_id'
-        dockerSwarmManager = '10.5.2.185:2375'
         dockerImage = ''
     }
     agent any
@@ -35,8 +34,8 @@ pipeline {
         }
         stage('Deploying to Docker Swarm') {
             steps {
-                sh "docker -H tcp://$dockerSwarmManager service rm testing1 || true"
-                sh "docker -H tcp://$dockerSwarmManager service create --name testing1 -p 8100:80 $registry:v$BUILD_NUMBER"
+                sh "docker -H tcp://10.5.2.185:2375 service rm testing1 || true"
+                sh "docker -H tcp://10.5.2.185:2375 service create --name nginx -p 9000:80 $registry:v$BUILD_NUMBER"
             }
         }
     }
